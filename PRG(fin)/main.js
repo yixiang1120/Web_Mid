@@ -54,7 +54,7 @@ $(function(){
     ];
     ctx = $("#myCanvas")[0].getContext("2d");
     imgMain = new Image();
-    imgMain.src = "images/main.png";
+    imgMain.src = "images/ch1.png";
     currentImgMain = {
     "x":0,
     "y":0
@@ -71,11 +71,12 @@ $(function(){
         Hearts:"images/heart.png",
         Coin:"images/coin.png",
         Ghost:"images/ghost.png",
-        second:"images/second.png",
+        second:"images/ch2.png",
         trees:"images/trees.png",
         add:"images/add.png",
         Sword3:"images/sword3.png",
         door:"images/door.png",
+        door1:"images/door.png",
     };
 
     loadImages(sources, function(images){
