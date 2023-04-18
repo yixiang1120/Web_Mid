@@ -14,7 +14,7 @@ $(function(){
             //將選項逐個加入
             questions[0].answers.forEach(function(element, index, array){
                 $("#options").append(`<input name='options' type='radio'
-                value='${index}'><label>${element[0]}</label><br><br>`);
+                value='${index}' class="mui-switch mui-switch-animbg"<label>${element[0]}</label>`);
             });
             //將按鈕上的文字換成Next
             $("#startButton").attr("value", "Next");
@@ -26,25 +26,40 @@ $(function(){
                 if(val.checked){
                     check = true;
                     //確認是否已走到最後要產生結果（A-D）
-                    if(isNaN(questions[currentQuiz].answers[i][1])){
+                    if(currentQuiz == 29){
+                        
+                        answers.push(questions[currentQuiz].answers[i][1]);
+                        var score = [];
+                        score.push(answers[4]+answers[9]+answers[13]+answers[17]+answers[23]+answers[29]);
+                        score.push(answers[3]+answers[8]+answers[11]+answers[18]+answers[22]+answers[26]);
+                        score.push(answers[2]+answers[7]+answers[14]+answers[16]+answers[24]+answers[27]);
+                        score.push(answers[1]+answers[6]+answers[10]+answers[15]+answers[20]+answers[25]);
+                        score.push(answers[0]+answers[5]+answers[12]+answers[19]+answers[21]+answers[28]);
+                        console.log(score);
+                        currentQuiz++;
                         //通往最終結果
-                        var finalResult = questions[currentQuiz].answers[i][1];
+                        var finalResult = questions[currentQuiz].question;
                         //顯示最終結果的標題
-                        $("#question").text(finalAnswers[finalResult][0]);
+                        $("#question").text(finalResult);
+                        $("#options").empty();//顯示最終結果內容
                         //將選項區域清空
-                        $("#options").append(`${finalAnswers[finalResult][1]}<br><br>`);
+                        finalAnswers[0].answers.forEach(function(element,index,array){
+                            $("#options").append(`<label>${element[0]}</label><label> ：</label>&nbsp&nbsp<label>${element[1]}</label>&nbsp&nbsp<label>${score[index]}</label><label>分</label><br><br>`);
+                        });
+                        //$("#options").append(`${finalAnswers[finalResult][1]}<br><br>`);
                         currentQuiz = null;
                         $("#startButton").attr("value", "重新開始");
                     }
                     else{
+                        answers.push(questions[currentQuiz].answers[i][1]);
                         //指定下一題，原始資料從1開始，所以要-1
-                        currentQuiz = questions[currentQuiz].answers[i][1]-1;
+                        currentQuiz++;//顯示新的題目
                         //顯示新的題目
                         $("#question").text(questions[currentQuiz].question);
                         $("#options").empty();
                         questions[currentQuiz].answers.forEach(function(element, index, array){
                             $("#options").append(`<input name='options' type='radio'
-                            value='${index}'><label>${element[0]}</label><br><br>`);
+                            value='${index}' class="mui-switch mui-switch-animbg"<label>${element[0]}</label>`);
                         });
                     }
                     return false;
