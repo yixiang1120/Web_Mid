@@ -35,22 +35,22 @@ function loadImages(sources, callback){
 //網頁載入完成後初始化動作
 $(function(){
     mapArray = [ //0-可走,1-障礙,2-終點,3-敵人
-    [0,1,1,7,1,0,3,1,1,1,0,5,0,3,1,0,1,-1,-1,-1],
-    [0,0,0,6,0,0,0,0,0,0,0,0,0,0,0,0,1,-1,0,0],
-    [4,1,0,10,1,1,0,1,1,0,0,0,1,1,1,0,1,-1,-1,-1],
+    [0,1,1,7,1,0,3,1,1,1,0,0,0,3,1,6,1,-1,-1,-1],
+    [0,0,0,6,0,0,0,0,0,0,0,0,0,0,3,6,1,-1,0,0],
+    [0,1,0,10,1,1,6,1,1,0,0,0,1,1,1,6,1,-1,-1,-1],
     [1,0,0,0,0,0,1,1,0,0,0,3,0,1,1,3,1,1,1,1],
-    [1,1,0,1,1,1,0,0,0,0,0,0,0,0,0,0,1,1,1,1],
-    [0,0,1,0,0,6,1,0,1,0,1,1,1,0,1,0,1,1,1,1],
-    [1,0,1,1,0,0,0,0,1,0,0,1,0,0,0,0,1,1,1,1],
-    [0,0,0,0,0,1,0,0,0,0,3,0,0,1,1,0,0,0,1,1],
-    [0,0,0,0,3,0,0,0,0,0,0,0,1,0,0,0,1,0,1,1],
-    [0,1,0,0,1,0,0,0,1,0,0,1,6,1,0,0,1,0,1,1],
-    [1,0,0,3,0,1,0,0,1,0,0,0,0,0,0,3,1,0,1,1],
-    [1,0,0,0,0,0,0,6,0,3,10,0,1,0,0,1,1,3,0,1],
-    [1,1,0,0,1,0,0,0,0,0,0,0,0,1,0,3,1,1,1,1],
-    [4,0,0,1,1,1,0,0,0,0,0,3,1,0,3,0,1,1,1,1],
-    [0,1,0,0,0,0,1,0,0,0,1,0,0,3,3,0,1,1,1,1],
-    [6,0,0,1,1,0,6,0,0,0,0,0,1,1,0,2,1,1,1,1],
+    [1,1,0,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,3],
+    [6,6,1,0,0,6,1,3,1,0,1,1,1,6,1,0,1,6,1,6],
+    [1,3,1,1,0,0,0,0,1,0,0,1,0,0,0,0,0,1,1,6],
+    [0,0,0,0,0,1,1,0,0,0,3,0,0,1,1,0,0,0,1,6],
+    [3,0,0,0,3,0,0,0,0,0,0,0,1,0,0,0,1,0,1,6],
+    [6,1,0,0,1,1,0,0,1,0,0,1,6,1,0,0,1,3,1,1],
+    [1,0,0,3,0,1,0,0,1,0,0,0,0,0,0,3,1,0,1,0],
+    [1,0,0,0,0,0,0,6,0,3,11,0,1,0,0,1,1,0,0,0],
+    [1,1,0,0,1,0,0,1,1,0,0,0,0,1,0,3,1,6,1,1],
+    [4,0,0,1,1,1,0,0,1,0,0,3,1,0,3,6,1,1,3,1],
+    [0,1,0,0,0,0,1,0,1,1,1,0,0,3,3,0,6,3,6,1],
+    [6,0,0,1,1,6,6,0,0,0,0,0,1,1,0,2,1,1,6,6],
     ];
     ctx = $("#myCanvas")[0].getContext("2d");
     imgMain = new Image();
@@ -112,6 +112,9 @@ $(function(){
                     ctx.drawImage(images.Sword3, 0,0,30,29,y*gridLength,x*gridLength,gridLength,gridLength);
                 }    
                 else if(mapArray[x][y]==10){//傳送門
+                    ctx.drawImage(images.door, 0,0,32,31,y*gridLength,x*gridLength,gridLength,gridLength);
+                }    
+                else if(mapArray[x][y]==11){//傳送門
                     ctx.drawImage(images.door, 0,0,32,31,y*gridLength,x*gridLength,gridLength,gridLength);
                 }    
             }
@@ -340,6 +343,17 @@ $(function(){
                         ctx.drawImage(imgMain, 285,cutImagePositionY,50,46,gridLength*10,gridLength*10,gridLength,gridLength);
                     else
                         ctx.drawImage(imgMain, 430,cutImagePositionY,50,46,currentImgMain.x,currentImgMain.y,gridLength,gridLength);
+                    break;
+                case 11: // 傳送門
+                    $("#talkBox").text("this is the door!!");
+                    currentImgMain.x = gridLength*3;
+                    currentImgMain.y = gridLength*3;
+                    if(change == 0)
+                        ctx.drawImage(imgMain, 285,cutImagePositionY,50,46,gridLength*3,gridLength*3,gridLength,gridLength);
+                    else
+                        ctx.drawImage(imgMain, 430,cutImagePositionY,50,46,currentImgMain.x,currentImgMain.y,gridLength,gridLength);     
+                    break
+                default:    
                     return;
                 }
                 

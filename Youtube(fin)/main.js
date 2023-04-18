@@ -42,10 +42,7 @@ function onPlayerReady(event){
                     endSeconds:playTime[currentPlay][1],
                     suggestedQuality:"large"
                 });
-                if(currentPlay > 2)
-                    $("h2").text(player.getVideoData().title + ", 此為版權音樂可至YouTube聆聽");
-                else
-                    $("h2").text(player.getVideoData().title);
+                $("h2").text(player.getVideoData().title);
                 player.playVideo();
                 play = 1;   
             }
@@ -152,9 +149,11 @@ $("#Button").on("click", function(){
             break;  
         case 9:
             if(a == "繼續讓我為你想為你瘋陪你老"){
+                play = 0;
+
                 $("h2").text("恭喜答對！可繼續下一題，贏得高額獎金！");
                 document.querySelector('#Button9').style = "background-image: linear-gradient(135deg, #f34079 40%, #fc894d)";
-                alert("WIN!!!!!!")
+                alert("WIN 300.0000!!!!!!")
             }
             else
                 $("h2").text("QQ你答錯了，要再嘗試一次嗎？");
@@ -188,7 +187,7 @@ function onPlayerStateChange(event){
                 $("h2").text("☆☆☆☆☆☆☆☆☆☆☆☆");
                 break;
             case 5:
-                $("h2").text("☆☆☆☆☆☆☆☆☆☆☆☆☆☆");
+                $("h2").text("☆☆☆☆☆☆☆☆☆☆☆☆☆☆");
                 break;
             case 6:
                 $("h2").text("☆☆☆☆☆☆☆☆☆☆☆☆☆");
